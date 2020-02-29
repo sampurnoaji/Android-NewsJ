@@ -56,4 +56,10 @@ dependencies {
 
     //lifecycle
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+
+    //support
+    implementation "com.google.android.material:material:1.1.0"
+
+    //pager indicator
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 }

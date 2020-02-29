@@ -22,9 +22,19 @@ public class ViewPagerAdapter extends PagerAdapter {
     private Context context;
     private List<Article> articles;
 
+    private OnItemClickCallback onItemClickCallback;
+
     public ViewPagerAdapter(Context context, List<Article> articles) {
         this.context = context;
         this.articles = articles;
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(Article article);
+    }
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
     }
 
     @NonNull
@@ -39,8 +49,14 @@ public class ViewPagerAdapter extends PagerAdapter {
                 .placeholder(new ColorDrawable(Color.GRAY))
                 .into(binding.ivPoster);
 
-        container.addView(binding.getRoot());
+        binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(article);
+            }
+        });
 
+        container.addView(binding.getRoot());
         return binding.getRoot();
     }
 

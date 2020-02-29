@@ -1,5 +1,6 @@
 package id.petersam.newsj.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -63,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(update);
             }
         }, 500, 3000);
+
+        pagerAdapter.setOnItemClickCallback(article -> {
+            Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+            intent.putExtra(DetailActivity.EXTRA_NEWS, article);
+            startActivity(intent);
+        });
     }
 
     private void getTopHeadlines() {
